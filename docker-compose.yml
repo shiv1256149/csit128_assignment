@@ -12,7 +12,16 @@ services:
     ports:
       - "3306:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASSWORD:-rootpass}"]
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-p${DB_ROOT_PASSWORD:-rootpass}",
+        ]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -26,7 +35,7 @@ services:
         condition: service_healthy
     environment:
       PORT: 3010
-      NODE_ENV: production
+      NODE_ENV: ${NODE_ENV:-production}
       DB_HOST: db
       DB_PORT: 3306
       DB_USER: ${DB_USER:-veyra}
