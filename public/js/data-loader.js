@@ -147,6 +147,38 @@
     }
   }
 
+  // Product cards (read from JSON), shown on products.html.
+  async function renderProducts() {
+    const wrap = document.getElementById("productsGrid");
+    if (!wrap) return;
+    try {
+      const products = await getJSON("/api/products");
+      if (!products.length) {
+        wrap.innerHTML = '<p class="skeleton">No products published yet.</p>';
+        return;
+      }
+      wrap.innerHTML = products
+        .map(
+          (p) =>
+            '<article class="card">' +
+            (p.category ? '<span class="tag">' + esc(p.category) + "</span>" : "") +
+            "<h3>" +
+            esc(p.name) +
+            "</h3>" +
+            "<p>" +
+            esc(p.description) +
+            "</p>" +
+            '<span class="price-tag">' +
+            esc(p.price) +
+            "</span>" +
+            "</article>",
+        )
+        .join("");
+    } catch (e) {
+      wrap.innerHTML = "<p>Unable to load products.</p>";
+    }
+  }
+
   // Awards rendered as a <table>.
   async function renderAwards() {
     const body = document.getElementById("awardsBody");
@@ -381,6 +413,7 @@
     renderCompany();
     renderTimeline();
     renderServices();
+    renderProducts();
     renderAwards();
     renderTestimonials();
     renderTeam();

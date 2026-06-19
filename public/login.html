@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in — Veyra Technologies</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/tailwind.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="index.html"
+          ><img src="images/logo.svg" alt="Veyra logo" width="30" height="30" /><span>Veyra</span></a
+        >
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li id="navAuthItem"><a href="login.html" id="navAuthLink">Log in</a></li>
+          <li id="navSignupItem"><a href="register.html" id="navSignupLink" class="btn btn--primary" style="padding: 8px 16px; font-size: 0.9rem">Sign up</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section" style="padding-top: 50px">
+        <div class="container" style="max-width: 420px">
+          <div class="section-head" style="text-align: center">
+            <span class="eyebrow">Welcome back</span>
+            <h1>Log in.</h1>
+          </div>
+
+          <form class="form" id="loginForm" novalidate>
+            <div class="form-alert" id="loginAlert" role="alert" style="display: none"></div>
+
+            <div class="field">
+              <label for="lEmail">Email <span class="req">*</span></label>
+              <input type="email" id="lEmail" name="email" autocomplete="email" placeholder="name@example.com" />
+              <span class="error-msg" data-error="email"></span>
+            </div>
+
+            <div class="field">
+              <label for="lPassword">Password <span class="req">*</span></label>
+              <input type="password" id="lPassword" name="password" autocomplete="current-password" />
+              <span class="error-msg" data-error="password"></span>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center">Log in</button>
+            <p style="margin-top: 14px; text-align: center; font-size: 0.92rem">
+              No account yet? <a href="register.html">Sign up</a>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom" style="border-top: 0; padding-top: 0; justify-content: center">
+          <span>&copy; <span id="year">2026</span> Veyra Technologies LLC. All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/auth-nav.js" defer></script>
+    <script src="js/account.js" defer></script>
+  </body>
+</html>

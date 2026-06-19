@@ -1,0 +1,9 @@
+/* Preflight (Tailwind's CSS reset) is intentionally skipped: the site
+   already has a hand-built styles.css with its own tuned base styles,
+   and resetting them site-wide would fight that instead of extending it. */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+@source "../../*.html";
+@source "../../js/**/*.js";
+@source "../../../views/**/*.ejs";

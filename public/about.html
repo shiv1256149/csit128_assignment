@@ -10,6 +10,7 @@
     />
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/tailwind.css" />
   </head>
   <body>
     <header class="site-header">
@@ -33,9 +34,13 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="news.html">News</a></li>
           <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li id="navAuthItem"><a href="login.html" id="navAuthLink">Log in</a></li>
+          <li id="navSignupItem"><a href="register.html" id="navSignupLink" class="btn btn--primary" style="padding: 8px 16px; font-size: 0.9rem">Sign up</a></li>
         </ul>
       </nav>
     </header>
@@ -183,6 +188,7 @@
     </footer>
 
     <script src="js/main.js" defer></script>
+    <script src="js/auth-nav.js" defer></script>
     <script src="js/data-loader.js" defer></script>
   </body>
 </html>
