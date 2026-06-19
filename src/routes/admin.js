@@ -74,10 +74,12 @@ router.get(
     const [{ count: team }] = await db("team_members").count("id as count");
     const [{ count: comments }] = await db("comments").count("id as count");
     const [{ count: users }] = await db("users").count("id as count");
+    const [{ count: news }] = await db("news_articles").count("id as count");
+    const [{ count: orders }] = await db("orders").count("id as count");
 
     res.render("admin/dashboard", {
       admin: req.session.admin,
-      counts: { products, services, team, comments, users },
+      counts: { products, services, team, comments, users, news, orders },
     });
   })
 );
@@ -225,6 +227,75 @@ router.post(
 );
 
 /* ---------------------------------------------------------------- *
+ * News
+ * ---------------------------------------------------------------- */
+router.get(
+  "/news",
+  asyncHandler(async (req, res) => {
+    const articles = await db("news_articles").orderBy("published_at", "desc");
+    res.render("admin/news", { admin: req.session.admin, articles, editing: null });
+  })
+);
+
+router.get(
+  "/news/:id/edit",
+  asyncHandler(async (req, res) => {
+    const article = await db("news_articles").where({ id: req.params.id }).first();
+    if (!article) return res.redirect("/admin/news");
+    const articles = await db("news_articles").orderBy("published_at", "desc");
+    res.render("admin/news", { admin: req.session.admin, articles, editing: article });
+  })
+);
+
+router.post(
+  "/news",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    const { slug, title, category, summary, published_at, order_index } = req.body;
+    if (!slug || !title || !published_at) return res.redirect("/admin/news");
+    await db("news_articles").insert({
+      slug: clamp(slug, 60),
+      title: clamp(title, 200),
+      category: clamp(category, 80) || null,
+      summary: clamp(summary, 2000) || null,
+      published_at,
+      order_index: Number(order_index) || 0,
+    });
+    res.redirect("/admin/news");
+  })
+);
+
+router.post(
+  "/news/:id",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    const { slug, title, category, summary, published_at, order_index, is_active } = req.body;
+    await db("news_articles")
+      .where({ id: req.params.id })
+      .update({
+        slug: clamp(slug, 60),
+        title: clamp(title, 200),
+        category: clamp(category, 80) || null,
+        summary: clamp(summary, 2000) || null,
+        published_at,
+        order_index: Number(order_index) || 0,
+        is_active: is_active === "on",
+        updated_at: db.fn.now(),
+      });
+    res.redirect("/admin/news");
+  })
+);
+
+router.post(
+  "/news/:id/delete",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    await db("news_articles").where({ id: req.params.id }).del();
+    res.redirect("/admin/news");
+  })
+);
+
+/* ---------------------------------------------------------------- *
  * Team members
  * ---------------------------------------------------------------- */
 router.get(
@@ -324,6 +395,49 @@ router.post(
   asyncHandler(async (req, res) => {
     await db("comments").where({ id: req.params.id }).del();
     res.redirect("/admin/feedback");
+  })
+);
+
+/* ---------------------------------------------------------------- *
+ * Orders
+ * ---------------------------------------------------------------- */
+router.get(
+  "/orders",
+  asyncHandler(async (req, res) => {
+    const orders = await db("orders")
+      .join("users", "users.id", "orders.user_id")
+      .orderBy("orders.created_at", "desc")
+      .select(
+        "orders.id",
+        "orders.item_type",
+        "orders.item_name",
+        "orders.item_price",
+        "orders.status",
+        "orders.created_at",
+        "users.name as buyer_name",
+        "users.email as buyer_email"
+      );
+    res.render("admin/orders", { admin: req.session.admin, orders });
+  })
+);
+
+router.post(
+  "/orders/:id/status",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    const { status } = req.body;
+    if (!["pending", "fulfilled", "cancelled"].includes(status)) return res.redirect("/admin/orders");
+    await db("orders").where({ id: req.params.id }).update({ status, updated_at: db.fn.now() });
+    res.redirect("/admin/orders");
+  })
+);
+
+router.post(
+  "/orders/:id/delete",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    await db("orders").where({ id: req.params.id }).del();
+    res.redirect("/admin/orders");
   })
 );
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/admin-head", { title: "News" }) %>
+<body class="bg-slate-100 min-h-screen">
+  <%- include("../partials/admin-nav") %>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-6"><%= editing ? "Edit article" : "New article" %></h1>
+
+    <form method="POST" action="<%= editing ? `/admin/news/${editing.id}` : '/admin/news' %>"
+          class="bg-white rounded-lg shadow p-6 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Slug</label>
+        <input name="slug" required value="<%= editing ? editing.slug : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Title</label>
+        <input name="title" required value="<%= editing ? editing.title : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Category</label>
+        <input name="category" value="<%= editing ? (editing.category || '') : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Published date</label>
+        <input type="date" name="published_at" required
+               value="<%= editing ? new Date(editing.published_at).toISOString().slice(0,10) : '' %>"
+               class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Order</label>
+        <input type="number" name="order_index" value="<%= editing ? editing.order_index : 0 %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm text-slate-600 mb-1">Summary</label>
+        <textarea name="summary" rows="3" class="w-full border rounded px-3 py-2"><%= editing ? (editing.summary || '') : '' %></textarea>
+      </div>
+      <% if (editing) { %>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" name="is_active" id="is_active" <%= editing.is_active ? "checked" : "" %> />
+          <label for="is_active" class="text-sm text-slate-600">Visible on site</label>
+        </div>
+      <% } %>
+      <div class="md:col-span-2 flex gap-3">
+        <button type="submit" class="bg-slate-900 text-white px-4 py-2 rounded hover:bg-slate-700">
+          <%= editing ? "Save changes" : "Create article" %>
+        </button>
+        <% if (editing) { %>
+          <a href="/admin/news" class="px-4 py-2 rounded border">Cancel</a>
+        <% } %>
+      </div>
+    </form>
+
+    <table class="w-full bg-white rounded-lg shadow overflow-hidden text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-left">
+        <tr><th class="px-4 py-2">Title</th><th class="px-4 py-2">Category</th><th class="px-4 py-2">Published</th><th class="px-4 py-2">Active</th><th class="px-4 py-2"></th></tr>
+      </thead>
+      <tbody>
+        <% articles.forEach(a => { %>
+          <tr class="border-t">
+            <td class="px-4 py-2"><%= a.title %></td>
+            <td class="px-4 py-2"><%= a.category || "—" %></td>
+            <td class="px-4 py-2"><%= new Date(a.published_at).toISOString().slice(0,10) %></td>
+            <td class="px-4 py-2"><%= a.is_active ? "Yes" : "No" %></td>
+            <td class="px-4 py-2 flex gap-2">
+              <a href="/admin/news/<%= a.id %>/edit" class="text-blue-600 hover:underline">Edit</a>
+              <form method="POST" action="/admin/news/<%= a.id %>/delete" onsubmit="return confirm('Delete this article?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-red-600 hover:underline">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

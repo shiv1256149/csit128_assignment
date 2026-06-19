@@ -132,10 +132,13 @@
             '<span class="price-tag">' +
             esc(s.startingPrice) +
             "</span>" +
-            '<p style="margin-top: 14px">' +
+            '<p style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap">' +
+            '<button type="button" class="btn btn--primary buy-btn" data-item-type="service" data-item-id="' +
+            esc(s.id) +
+            '">Buy this service</button>' +
             '<a class="btn btn--ghost" href="contact.html?subject=' +
             encodeURIComponent("Service inquiry: " + s.name) +
-            '">Get this service</a>' +
+            '">Ask a question</a>' +
             "</p>" +
             "</article>",
         )
@@ -169,10 +172,13 @@
             '<span class="price-tag">' +
             esc(p.price) +
             "</span>" +
-            '<p style="margin-top: 14px">' +
+            '<p style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap">' +
+            '<button type="button" class="btn btn--primary buy-btn" data-item-type="product" data-item-id="' +
+            esc(p.id) +
+            '">Buy this product</button>' +
             '<a class="btn btn--ghost" href="contact.html?subject=' +
             encodeURIComponent("Product inquiry: " + p.name) +
-            '">Buy this product</a>' +
+            '">Ask a question</a>' +
             "</p>" +
             "</article>",
         )
@@ -385,29 +391,71 @@
     }
   }
 
-  // news page: load XML+XSLT, transform to HTML via XSLTProcessor in-browser
+  // news page: press releases read from MySQL via /api/news
   async function renderNews() {
     const wrap = document.getElementById("newsContainer");
     if (!wrap) return;
     try {
-      const [xmlText, xslText] = await Promise.all([
-        fetch("data/news.xml").then((r) => r.text()),
-        fetch("data/news.xsl").then((r) => r.text()),
-      ]);
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(xmlText, "application/xml");
-      const xsl = parser.parseFromString(xslText, "application/xml");
-
-      const processor = new XSLTProcessor();
-      processor.importStylesheet(xsl);
-      const fragment = processor.transformToFragment(xml, document);
-
-      wrap.innerHTML = "";
-      wrap.appendChild(fragment);
+      const releases = await getJSON("/api/news");
+      wrap.innerHTML = releases
+        .map(
+          (r) =>
+            '<article class="news-item">' +
+            '<div class="date">' +
+            niceDate(r.publishedAt) +
+            (r.category ? ' <span class="tag">' + esc(r.category) + "</span>" : "") +
+            "</div>" +
+            "<h3>" +
+            esc(r.title) +
+            "</h3>" +
+            "<p>" +
+            esc(r.summary) +
+            "</p>" +
+            "</article>",
+        )
+        .join("");
     } catch {
       wrap.innerHTML = "<p>Unable to load company news.</p>";
     }
   }
+
+  // simulated checkout: Buy buttons on product/service cards (delegated, cards render async)
+  document.addEventListener("click", async function (ev) {
+    const btn = ev.target.closest(".buy-btn");
+    if (!btn) return;
+
+    const itemType = btn.getAttribute("data-item-type");
+    const itemId = btn.getAttribute("data-item-id");
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Placing order…";
+
+    try {
+      const meRes = await fetch("/api/auth/me");
+      if (!meRes.ok) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ itemType, itemId }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        btn.textContent = "Order placed ✓";
+      } else {
+        btn.disabled = false;
+        btn.textContent = (data.errors && data.errors[0]) || "Order failed";
+        setTimeout(() => (btn.textContent = originalText), 2500);
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = "Order failed";
+      setTimeout(() => (btn.textContent = originalText), 2500);
+    }
+  });
 
   /* ---------- run everything relevant for this page --------------- */
   document.addEventListener("DOMContentLoaded", function () {

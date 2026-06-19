@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/admin-head", { title: "Orders" }) %>
+<body class="bg-slate-100 min-h-screen">
+  <%- include("../partials/admin-nav") %>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-6">Orders</h1>
+
+    <table class="w-full bg-white rounded-lg shadow overflow-hidden text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-left">
+        <tr>
+          <th class="px-4 py-2">Buyer</th>
+          <th class="px-4 py-2">Type</th>
+          <th class="px-4 py-2">Item</th>
+          <th class="px-4 py-2">Price</th>
+          <th class="px-4 py-2">Status</th>
+          <th class="px-4 py-2">Placed</th>
+          <th class="px-4 py-2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(o => { %>
+          <tr class="border-t">
+            <td class="px-4 py-2"><%= o.buyer_name %><br/><span class="text-slate-400"><%= o.buyer_email %></span></td>
+            <td class="px-4 py-2 capitalize"><%= o.item_type %></td>
+            <td class="px-4 py-2"><%= o.item_name %></td>
+            <td class="px-4 py-2"><%= o.item_price || "—" %></td>
+            <td class="px-4 py-2">
+              <form method="POST" action="/admin/orders/<%= o.id %>/status" class="flex items-center gap-2">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <select name="status" onchange="this.form.submit()" class="border rounded px-2 py-1">
+                  <% ["pending", "fulfilled", "cancelled"].forEach(s => { %>
+                    <option value="<%= s %>" <%= o.status === s ? "selected" : "" %>><%= s %></option>
+                  <% }) %>
+                </select>
+              </form>
+            </td>
+            <td class="px-4 py-2"><%= new Date(o.created_at).toISOString().slice(0,10) %></td>
+            <td class="px-4 py-2">
+              <form method="POST" action="/admin/orders/<%= o.id %>/delete" onsubmit="return confirm('Delete this order?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-red-600 hover:underline">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+        <% if (!orders.length) { %>
+          <tr><td colspan="7" class="px-4 py-6 text-center text-slate-400">No orders yet.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

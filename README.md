@@ -4,7 +4,8 @@ CSIT128 _Introduction to Web Technology_ — Assignment 2.
 A full-stack company-profile web application for the fictional cloud provider
 **Veyra Technologies**: a static front end (HTML/CSS/JS + Tailwind utilities),
 an Express + MySQL backend (via Knex migrations/seeds), JWT auth for public
-users, a server-rendered admin panel, and an XML + XSLT newsroom.
+users, a server-rendered admin panel, and a simulated checkout for products
+and services.
 
 ## Stack
 

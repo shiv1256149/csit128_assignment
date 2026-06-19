@@ -4,6 +4,7 @@ const rateLimit = require("express-rate-limit");
 const db = require("../db");
 const asyncHandler = require("../utils/asyncHandler");
 const { isValidName, isValidEmail, isValidRating } = require("../utils/validators");
+const { requireAuth } = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -63,6 +64,17 @@ router.get(
       .where({ is_active: true })
       .orderBy("order_index")
       .select("slug as id", "name", "category", "description", "price", "image_url as imageUrl");
+    res.json(rows);
+  })
+);
+
+router.get(
+  "/news",
+  asyncHandler(async (_req, res) => {
+    const rows = await db("news_articles")
+      .where({ is_active: true })
+      .orderBy("published_at", "desc")
+      .select("slug as id", "title", "category", "summary", "published_at as publishedAt");
     res.json(rows);
   })
 );
@@ -144,6 +156,56 @@ router.post(
       ok: true,
       comment: { id, name: record.name, rating: record.rating, message: record.message },
     });
+  })
+);
+
+const orderLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { ok: false, errors: ["Too many orders submitted. Please try again later."] },
+});
+
+// simulated checkout: no payment gateway, just records the intent to buy
+router.post(
+  "/orders",
+  requireAuth,
+  orderLimiter,
+  asyncHandler(async (req, res) => {
+    const { itemType, itemId } = req.body || {};
+    if (itemType !== "product" && itemType !== "service") {
+      return res.status(400).json({ ok: false, errors: ["itemType must be 'product' or 'service'."] });
+    }
+
+    const table = itemType === "product" ? "products" : "services";
+    const item = await db(table).where({ slug: String(itemId || ""), is_active: true }).first();
+    if (!item) return res.status(404).json({ ok: false, errors: ["Item not found or unavailable."] });
+
+    const [id] = await db("orders").insert({
+      user_id: req.user.sub,
+      item_type: itemType,
+      item_id: item.id,
+      item_name: item.name,
+      item_price: itemType === "product" ? item.price : item.starting_price,
+    });
+
+    res.status(201).json({
+      ok: true,
+      order: { id, itemType, itemName: item.name, status: "pending" },
+    });
+  })
+);
+
+router.get(
+  "/orders/mine",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const rows = await db("orders")
+      .where({ user_id: req.user.sub })
+      .orderBy("created_at", "desc")
+      .select("id", "item_type as itemType", "item_name as itemName", "item_price as itemPrice", "status", "created_at as createdAt");
+    res.json(rows);
   })
 );
 
