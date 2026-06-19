@@ -17,10 +17,7 @@ services:
       timeout: 5s
       retries: 20
 
-  # Single Express app serving both the JSON/auth API and the static
-  # front end (public/) plus the server-rendered admin panel — this one
-  # service is what "starts the frontend via docker-compose" since
-  # Express already serves it, no separate frontend container needed.
+  # one app serves both API and static frontend - no separate frontend container needed
   app:
     build: .
     restart: unless-stopped
@@ -41,8 +38,11 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@veyra.tech}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       CORS_ORIGIN: ${CORS_ORIGIN:-}
+    volumes:
+      - app_logs:/app/logs
     ports:
       - "3010:3010"
 
 volumes:
   db_data:
+  app_logs:

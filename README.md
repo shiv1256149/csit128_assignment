@@ -123,6 +123,13 @@ every run, so the suite is deterministic regardless of prior runs.
 npm run lint
 ```
 
+## Logging
+
+Every request is logged two ways (skipped in `NODE_ENV=test`):
+
+- console (dev-formatted, colorized) - visible with `docker compose logs -f app`
+- `logs/access.log` (combined/Apache format) - persisted via the `app_logs` volume in docker-compose
+
 ## CI
 
 `.github/workflows/ci.yml` runs on every push/PR to `dev` and `main`: spins up

@@ -1,9 +1,7 @@
 require("dotenv").config({ quiet: true });
 const db = require("../src/db");
 
-// Runs after migrations on every container start. Only seeds when the
-// users table is empty, so admin edits made through the panel survive
-// container restarts instead of being wiped by a re-seed.
+// seed only if users table empty, so admin edits survive restarts
 (async () => {
   const row = await db("users").count("id as c").first();
   if (Number(row.c) === 0) {
