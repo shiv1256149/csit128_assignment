@@ -116,8 +116,7 @@ const commentLimiter = rateLimit({
   message: { ok: false, errors: ["Too many comments submitted. Please try again later."] },
 });
 
-// We never trust the client: the browser validates first, but every
-// field is re-checked here before it touches the database.
+// never trust client: re-check every field server-side too
 router.post(
   "/comments",
   commentLimiter,

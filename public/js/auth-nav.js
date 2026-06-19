@@ -1,5 +1,4 @@
-/* Swaps the Login/Sign up nav links for a greeting + logout button
-   when a visitor already has a valid session (checked via /api/auth/me). */
+// swaps Login/Sign up nav links for greeting+logout if /api/auth/me confirms a session
 (function () {
   "use strict";
 

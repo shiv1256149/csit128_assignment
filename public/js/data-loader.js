@@ -1,11 +1,4 @@
-/* =====================================================================
-   data-loader.js  -  fetches data from the Node/Express API and renders
-   it into the page. The same file is included on every page; each
-   render function runs only if its target element exists on that page,
-   so one script powers the whole site.
-
-   Data source: the JSON "database" exposed by server.js at /api/*.
-   ===================================================================== */
+// fetches /api/* data, renders it; each fn guards on its own target element existing
 
 (function () {
   "use strict";
@@ -301,8 +294,7 @@
     }
   }
 
-  // Visitor comments list (newest first) on the feedback page.
-  // Exposed on window so validation.js can refresh it after a new post.
+  // visitor comments, newest first; exposed on window so validation.js can refresh it
   async function renderComments() {
     const wrap = document.getElementById("commentsList");
     if (!wrap) return;
@@ -393,8 +385,7 @@
     }
   }
 
-  // News page: load the XML document and the XSLT stylesheet, then
-  // transform the XML into HTML in the browser using XSLTProcessor.
+  // news page: load XML+XSLT, transform to HTML via XSLTProcessor in-browser
   async function renderNews() {
     const wrap = document.getElementById("newsContainer");
     if (!wrap) return;

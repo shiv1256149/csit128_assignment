@@ -1,13 +1,4 @@
-/* =====================================================================
-   validation.js  -  client-side validation and submission for the
-   customer feedback / comments form on feedback.html.
-
-   - Validates each field live (on blur) and again on submit.
-   - Shows a specific error message under each field.
-   - Includes a hidden "honeypot" field to deter spam bots.
-   - Submits with fetch() to POST /api/comments and shows the result.
-   The server re-validates everything, so this is for UX, not security.
-   ===================================================================== */
+// feedback form: live validation + honeypot, posts to /api/comments (server re-validates, this is UX only)
 
 (function () {
   "use strict";

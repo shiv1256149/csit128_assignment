@@ -1,8 +1,4 @@
-/* =====================================================================
-   main.js  -  site-wide behaviour shared by every page
-   (mobile navigation, active link highlighting, footer year).
-   Loaded on every HTML page with <script src="js/main.js" defer>.
-   ===================================================================== */
+// site-wide: mobile nav toggle, active link highlight, footer year
 
 (function () {
   "use strict";

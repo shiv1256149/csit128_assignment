@@ -20,9 +20,7 @@ const authLimiter = rateLimit({
 const cookieOptions = {
   httpOnly: true,
   sameSite: "lax",
-  // Opt-in, not tied to NODE_ENV: a production deployment without TLS
-  // termination in front of it (e.g. plain docker-compose) would silently
-  // drop the cookie and lock everyone out if this defaulted to NODE_ENV.
+  // opt-in flag, not NODE_ENV-tied: Secure cookie over plain HTTP silently drops + locks out login
   secure: process.env.COOKIE_SECURE === "true",
   maxAge: 2 * 60 * 60 * 1000,
 };

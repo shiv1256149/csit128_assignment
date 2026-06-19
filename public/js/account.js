@@ -1,5 +1,4 @@
-/* Validation + submission for register.html and login.html.
-   Each block guards on its own form so this single file covers both pages. */
+// register.html + login.html validation/submit, each block guards its own form
 (function () {
   "use strict";
 

@@ -1,6 +1,4 @@
-/* Client-side validation for the contact form. No backend persistence —
-   on success it opens the visitor's email client via a mailto: link
-   addressed to hello@veyra.tech with the message pre-filled. */
+// contact form: client validation only, opens mailto: link on success (no backend)
 (function () {
   "use strict";
 
@@ -9,8 +7,7 @@
 
   const alertBox = document.getElementById("contactAlert");
 
-  // Pre-fill the subject when arriving from a "Get this service/product"
-  // link, e.g. contact.html?subject=Service%20inquiry%3A%20Cloud%20Compute
+  // prefill subject from ?subject= query param (service/product CTA links)
   const presetSubject = new URLSearchParams(window.location.search).get("subject");
   if (presetSubject) form.elements["subject"].value = presetSubject.slice(0, 120);
 

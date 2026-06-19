@@ -9,8 +9,7 @@ function isValidEmail(email) {
   return typeof email === "string" && EMAIL_PATTERN.test(email.trim()) && email.length <= 190;
 }
 
-// Min 8 chars, at least one letter and one digit. Deliberately not
-// requiring symbols — long passphrases should not be punished.
+// 8+ chars, 1 letter + 1 digit; no symbol requirement (don't punish passphrases)
 function isValidPassword(password) {
   return (
     typeof password === "string" &&

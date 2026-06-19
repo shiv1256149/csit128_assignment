@@ -10,8 +10,7 @@ const { attachCsrfToken, verifyCsrfToken } = require("../middleware/csrf");
 
 const router = express.Router();
 
-// Defends against ER_DATA_TOO_LONG crashes from oversized form input by
-// clamping to the column width before the value ever reaches a query.
+// clamp to column width, avoids ER_DATA_TOO_LONG crashes
 const clamp = (value, max) => (typeof value === "string" ? value.trim().slice(0, max) : value);
 
 router.use(

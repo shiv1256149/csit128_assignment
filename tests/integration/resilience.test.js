@@ -4,14 +4,7 @@ const db = require("../../src/db");
 
 afterAll(() => db.destroy());
 
-// Regression test for a real production incident: with JWT_SECRET blank,
-// the DB insert in /api/auth/register succeeded and then jwt.sign() threw
-// synchronously. Because the route was an unhandled async throw, it
-// crashed the whole Node process - leaving a user row behind with no
-// response ever sent, so the next register attempt for the same email
-// got a confusing 409 "already exists" for an account the caller never
-// saw succeed. asyncHandler + the global error middleware fix this: the
-// request now gets a clean 500 and the process keeps running.
+// regression: blank JWT_SECRET used to crash the process mid-register, leaving a ghost user row
 describe("async route errors do not crash the process", () => {
   const originalSecret = process.env.JWT_SECRET;
 
@@ -28,8 +21,7 @@ describe("async route errors do not crash the process", () => {
 
     expect(res.status).toBe(500);
 
-    // The process is still alive and the DB connection still works -
-    // proof the error was caught, not an unhandled crash.
+    // process still alive + db still works = caught, not crashed
     const health = await request(app).get("/api/services");
     expect(health.status).toBe(200);
   });

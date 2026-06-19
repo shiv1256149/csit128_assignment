@@ -1,8 +1,6 @@
 const crypto = require("crypto");
 
-// Session-bound CSRF token for the server-rendered admin panel.
-// Simpler than the archived `csurf` package: one token per session,
-// embedded as a hidden field in every form, checked on writes.
+// session-bound CSRF token, hidden form field; csurf is archived, this replaces it
 function attachCsrfToken(req, res, next) {
   if (!req.session.csrfToken) {
     req.session.csrfToken = crypto.randomBytes(32).toString("hex");
