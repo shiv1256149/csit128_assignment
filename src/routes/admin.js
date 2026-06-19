@@ -22,7 +22,7 @@ router.use(
     cookie: {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.COOKIE_SECURE === "true",
       maxAge: 4 * 60 * 60 * 1000,
     },
   })
