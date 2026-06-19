@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/admin-head", { title: "Feedback" }) %>
+<body class="bg-slate-100 min-h-screen">
+  <%- include("../partials/admin-nav") %>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-6">Feedback moderation</h1>
+
+    <table class="w-full bg-white rounded-lg shadow overflow-hidden text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-left">
+        <tr><th class="px-4 py-2">Name</th><th class="px-4 py-2">Rating</th><th class="px-4 py-2">Message</th><th class="px-4 py-2">Approved</th><th class="px-4 py-2"></th></tr>
+      </thead>
+      <tbody>
+        <% comments.forEach(c => { %>
+          <tr class="border-t align-top">
+            <td class="px-4 py-2"><%= c.name %><br/><span class="text-xs text-slate-400"><%= c.email %></span></td>
+            <td class="px-4 py-2"><%= c.rating %>/5</td>
+            <td class="px-4 py-2 max-w-md"><%= c.message %></td>
+            <td class="px-4 py-2"><%= c.is_approved ? "Yes" : "No" %></td>
+            <td class="px-4 py-2 flex gap-2">
+              <form method="POST" action="/admin/feedback/<%= c.id %>/toggle">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-blue-600 hover:underline"><%= c.is_approved ? "Hide" : "Approve" %></button>
+              </form>
+              <form method="POST" action="/admin/feedback/<%= c.id %>/delete" onsubmit="return confirm('Delete this comment?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-red-600 hover:underline">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

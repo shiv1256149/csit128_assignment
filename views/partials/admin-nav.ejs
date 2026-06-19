@@ -1,0 +1,17 @@
+<nav class="bg-slate-900 text-slate-100">
+  <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between py-3">
+    <div class="flex items-center gap-6 flex-wrap">
+      <a href="/admin" class="font-semibold text-lg">Veyra Admin</a>
+      <a href="/admin/products" class="text-sm text-slate-300 hover:text-white">Products</a>
+      <a href="/admin/services" class="text-sm text-slate-300 hover:text-white">Services</a>
+      <a href="/admin/team" class="text-sm text-slate-300 hover:text-white">Team</a>
+      <a href="/admin/feedback" class="text-sm text-slate-300 hover:text-white">Feedback</a>
+      <a href="/admin/users" class="text-sm text-slate-300 hover:text-white">Users</a>
+    </div>
+    <form method="POST" action="/admin/logout">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <span class="text-sm text-slate-400 mr-3"><%= admin.name %></span>
+      <button type="submit" class="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-1.5 rounded">Log out</button>
+    </form>
+  </div>
+</nav>

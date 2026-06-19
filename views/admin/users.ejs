@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/admin-head", { title: "Users" }) %>
+<body class="bg-slate-100 min-h-screen">
+  <%- include("../partials/admin-nav") %>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-6">Users</h1>
+
+    <table class="w-full bg-white rounded-lg shadow overflow-hidden text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-left">
+        <tr><th class="px-4 py-2">Name</th><th class="px-4 py-2">Email</th><th class="px-4 py-2">Role</th><th class="px-4 py-2"></th></tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr class="border-t">
+            <td class="px-4 py-2"><%= u.name %></td>
+            <td class="px-4 py-2"><%= u.email %></td>
+            <td class="px-4 py-2"><%= u.role %></td>
+            <td class="px-4 py-2 flex gap-2">
+              <% if (u.id !== admin.id) { %>
+                <form method="POST" action="/admin/users/<%= u.id %>/role">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                  <input type="hidden" name="role" value="<%= u.role === 'admin' ? 'user' : 'admin' %>" />
+                  <button type="submit" class="text-blue-600 hover:underline">
+                    <%= u.role === 'admin' ? "Demote" : "Promote" %>
+                  </button>
+                </form>
+                <form method="POST" action="/admin/users/<%= u.id %>/delete" onsubmit="return confirm('Delete this user?');">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                  <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                </form>
+              <% } else { %>
+                <span class="text-slate-400">You</span>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

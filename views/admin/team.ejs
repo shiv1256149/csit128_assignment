@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/admin-head", { title: "Team" }) %>
+<body class="bg-slate-100 min-h-screen">
+  <%- include("../partials/admin-nav") %>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-6"><%= editing ? "Edit team member" : "New team member" %></h1>
+
+    <form method="POST" action="<%= editing ? `/admin/team/${editing.id}` : '/admin/team' %>"
+          class="bg-white rounded-lg shadow p-6 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Name</label>
+        <input name="name" required value="<%= editing ? editing.name : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Role</label>
+        <input name="role" required value="<%= editing ? editing.role : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Initials</label>
+        <input name="initials" value="<%= editing ? (editing.initials || '') : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Accent colour</label>
+        <input name="accent" value="<%= editing ? (editing.accent || '') : '' %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm text-slate-600 mb-1">Bio</label>
+        <textarea name="bio" rows="3" class="w-full border rounded px-3 py-2"><%= editing ? (editing.bio || '') : '' %></textarea>
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Order</label>
+        <input type="number" name="order_index" value="<%= editing ? editing.order_index : 0 %>" class="w-full border rounded px-3 py-2" />
+      </div>
+      <div class="flex items-center gap-2">
+        <input type="checkbox" name="founder" id="founder" <%= editing && editing.founder ? "checked" : "" %> />
+        <label for="founder" class="text-sm text-slate-600">Founder</label>
+      </div>
+      <% if (editing) { %>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" name="is_active" id="is_active" <%= editing.is_active ? "checked" : "" %> />
+          <label for="is_active" class="text-sm text-slate-600">Visible on site</label>
+        </div>
+      <% } %>
+      <div class="md:col-span-2 flex gap-3">
+        <button type="submit" class="bg-slate-900 text-white px-4 py-2 rounded hover:bg-slate-700">
+          <%= editing ? "Save changes" : "Add team member" %>
+        </button>
+        <% if (editing) { %>
+          <a href="/admin/team" class="px-4 py-2 rounded border">Cancel</a>
+        <% } %>
+      </div>
+    </form>
+
+    <table class="w-full bg-white rounded-lg shadow overflow-hidden text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-left">
+        <tr><th class="px-4 py-2">Name</th><th class="px-4 py-2">Role</th><th class="px-4 py-2">Founder</th><th class="px-4 py-2"></th></tr>
+      </thead>
+      <tbody>
+        <% team.forEach(m => { %>
+          <tr class="border-t">
+            <td class="px-4 py-2"><%= m.name %></td>
+            <td class="px-4 py-2"><%= m.role %></td>
+            <td class="px-4 py-2"><%= m.founder ? "Yes" : "No" %></td>
+            <td class="px-4 py-2 flex gap-2">
+              <a href="/admin/team/<%= m.id %>/edit" class="text-blue-600 hover:underline">Edit</a>
+              <form method="POST" action="/admin/team/<%= m.id %>/delete" onsubmit="return confirm('Delete this team member?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-red-600 hover:underline">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
