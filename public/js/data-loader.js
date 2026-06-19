@@ -139,6 +139,11 @@
             '<span class="price-tag">' +
             esc(s.startingPrice) +
             "</span>" +
+            '<p style="margin-top: 14px">' +
+            '<a class="btn btn--ghost" href="contact.html?subject=' +
+            encodeURIComponent("Service inquiry: " + s.name) +
+            '">Get this service</a>' +
+            "</p>" +
             "</article>",
         )
         .join("");
@@ -171,6 +176,11 @@
             '<span class="price-tag">' +
             esc(p.price) +
             "</span>" +
+            '<p style="margin-top: 14px">' +
+            '<a class="btn btn--ghost" href="contact.html?subject=' +
+            encodeURIComponent("Product inquiry: " + p.name) +
+            '">Buy this product</a>' +
+            "</p>" +
             "</article>",
         )
         .join("");

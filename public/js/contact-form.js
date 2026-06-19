@@ -9,6 +9,11 @@
 
   const alertBox = document.getElementById("contactAlert");
 
+  // Pre-fill the subject when arriving from a "Get this service/product"
+  // link, e.g. contact.html?subject=Service%20inquiry%3A%20Cloud%20Compute
+  const presetSubject = new URLSearchParams(window.location.search).get("subject");
+  if (presetSubject) form.elements["subject"].value = presetSubject.slice(0, 120);
+
   const rules = {
     name: {
       test: (v) => /^[A-Za-zЀ-ӿ\s'.-]{2,60}$/.test(v.trim()),
