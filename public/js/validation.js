@@ -149,7 +149,7 @@
           (data.errors && data.errors.join(" ")) || "Something went wrong. Please try again.";
         showAlert("fail", msg);
       }
-    } catch (err) {
+    } catch {
       showAlert("fail", "Could not reach the server. Please check your connection and try again.");
     } finally {
       submitBtn.disabled = false;

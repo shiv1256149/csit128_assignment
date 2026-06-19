@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpass
+          MYSQL_DATABASE: veyra
+          MYSQL_USER: veyra
+          MYSQL_PASSWORD: veyrapass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -uroot -prootpass"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    env:
+      NODE_ENV: test
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_USER: veyra
+      DB_PASSWORD: veyrapass
+      DB_NAME: veyra
+      JWT_SECRET: ${{ secrets.JWT_SECRET || 'ci-jwt-secret-not-for-prod' }}
+      JWT_EXPIRES_IN: 2h
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET || 'ci-session-secret-not-for-prod' }}
+      ADMIN_EMAIL: admin@veyra.tech
+      ADMIN_PASSWORD: CiTestPass123!
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The test suite runs against <DB_NAME>_test (see knexfile.js), so
+      # it needs its own schema alongside the one the mysql service
+      # container creates automatically from MYSQL_DATABASE.
+      - name: Create test database
+        run: |
+          mysql -h127.0.0.1 -P3306 -uroot -prootpass -e \
+            "CREATE DATABASE IF NOT EXISTS veyra_test; GRANT ALL PRIVILEGES ON veyra_test.* TO 'veyra'@'%'; FLUSH PRIVILEGES;"
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build CSS
+        run: npm run build:css
+
+      - name: Run tests
+        run: npm test

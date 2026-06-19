@@ -6,7 +6,6 @@ const rateLimit = require("express-rate-limit");
 const db = require("../db");
 const { requireAdminSession } = require("../middleware/adminAuth");
 const { attachCsrfToken, verifyCsrfToken } = require("../middleware/csrf");
-const { isValidName, isValidEmail } = require("../utils/validators");
 
 const router = express.Router();
 

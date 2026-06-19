@@ -87,7 +87,7 @@
           )
           .join("");
       }
-    } catch (e) {
+    } catch {
       if (introEl) introEl.innerHTML = "<p>Unable to load company information.</p>";
     }
   }
@@ -112,7 +112,7 @@
             "</td></tr>",
         )
         .join("");
-    } catch (e) {
+    } catch {
       body.innerHTML = '<tr><td colspan="3">Unable to load timeline.</td></tr>';
     }
   }
@@ -142,7 +142,7 @@
             "</article>",
         )
         .join("");
-    } catch (e) {
+    } catch {
       wrap.innerHTML = "<p>Unable to load services.</p>";
     }
   }
@@ -174,7 +174,7 @@
             "</article>",
         )
         .join("");
-    } catch (e) {
+    } catch {
       wrap.innerHTML = "<p>Unable to load products.</p>";
     }
   }
@@ -202,7 +202,7 @@
             "</td></tr>",
         )
         .join("");
-    } catch (e) {
+    } catch {
       body.innerHTML = '<tr><td colspan="4">Unable to load awards.</td></tr>';
     }
   }
@@ -246,7 +246,7 @@
           );
         })
         .join("");
-    } catch (e) {
+    } catch {
       wrap.innerHTML = "<p>Unable to load testimonials.</p>";
     }
   }
@@ -286,7 +286,7 @@
           .filter((m) => !m.founder)
           .map(card)
           .join("");
-    } catch (e) {
+    } catch {
       if (founders) founders.innerHTML = "<p>Unable to load the team.</p>";
     }
   }
@@ -323,7 +323,7 @@
             "</div>",
         )
         .join("");
-    } catch (e) {
+    } catch {
       wrap.innerHTML = "<p>Unable to load comments.</p>";
     }
   }
@@ -378,7 +378,7 @@
 
       // Show the headquarters by default.
       show("tashkent");
-    } catch (e) {
+    } catch {
       info.innerHTML = "<p>Unable to load office locations.</p>";
     }
   }
@@ -403,7 +403,7 @@
 
       wrap.innerHTML = "";
       wrap.appendChild(fragment);
-    } catch (e) {
+    } catch {
       wrap.innerHTML = "<p>Unable to load company news.</p>";
     }
   }
