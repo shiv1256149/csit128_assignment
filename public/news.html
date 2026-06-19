@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News — Veyra Technologies</title>
+    <meta
+      name="description"
+      content="Company news and press releases from Veyra Technologies."
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="index.html"
+          ><img
+            src="images/logo.svg"
+            alt="Veyra logo"
+            width="30"
+            height="30"
+          /><span>Veyra</span></a
+        >
+        <button
+          class="nav-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Newsroom</span>
+            <h1>Company news &amp; press releases.</h1>
+            <p class="lead">
+              The latest from Veyra. This page is generated from an
+              <strong>XML</strong> document transformed with an
+              <strong>XSLT</strong> stylesheet in your browser.
+            </p>
+          </div>
+
+          <div style="max-width: 760px">
+            <!-- Filled by the XML -> XSLT transform in data-loader.js -->
+            <div id="newsContainer">
+              <p class="skeleton">Loading news…</p>
+            </div>
+          </div>
+
+          <p style="margin-top: 30px; color: var(--muted)">
+            The raw data lives in <code>data/news.xml</code> and the
+            presentation rules in <code>data/news.xsl</code>. Keeping content
+            (XML) separate from presentation (XSLT) means the newsroom can be
+            restyled without touching the data.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">
+              <img src="images/logo.svg" alt="" width="28" height="28" /><span
+                >Veyra Technologies</span
+              >
+            </div>
+            <p style="max-width: 280px">
+              Cloud infrastructure engineered for emerging markets. Built in
+              Tashkent, serving the world.
+            </p>
+          </div>
+          <div>
+            <h4>Product</h4>
+            <a href="services.html">Cloud Compute</a
+            ><a href="services.html">Managed Databases</a
+            ><a href="services.html">Edge CDN</a
+            ><a href="services.html">Observability</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="about.html">About</a><a href="team.html">Team</a
+            ><a href="news.html">News</a><a href="feedback.html">Feedback</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="mailto:hello@veyra.tech">hello@veyra.tech</a
+            ><a href="tel:+998712001919">+998 71 200 19 19</a
+            ><a href="#" style="cursor: default">Tashkent, Uzbekistan</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >&copy; <span id="year">2026</span> Veyra Technologies LLC. All
+            rights reserved.</span
+          >
+          <span>CSIT128 Assignment 2 · University of Wollongong in Dubai</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/data-loader.js" defer></script>
+  </body>
+</html>

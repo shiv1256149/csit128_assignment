@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback — Veyra Technologies</title>
+    <meta
+      name="description"
+      content="Read what customers say about Veyra Technologies and leave your own comment."
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="index.html"
+          ><img
+            src="images/logo.svg"
+            alt="Veyra logo"
+            width="30"
+            height="30"
+          /><span>Veyra</span></a
+        >
+        <button
+          class="nav-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Testimonials (dynamic, from JSON) -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Customer feedback</span>
+            <h1>Trusted by teams across the region.</h1>
+            <p class="lead">
+              A few words from the engineers and founders who run their products
+              on Veyra.
+            </p>
+          </div>
+          <div class="grid grid--2" id="testimonialsGrid">
+            <p class="skeleton">Loading testimonials…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comment form + live comments -->
+      <section class="section section--soft" id="contact">
+        <div class="container">
+          <div class="grid grid--2" style="align-items: start; gap: 34px">
+            <!-- Comment form (validated by validation.js) -->
+            <div>
+              <div class="section-head" style="margin-bottom: 20px">
+                <span class="eyebrow">Leave a comment</span>
+                <h2>Tell us what you think</h2>
+                <p>
+                  Your feedback is saved to our database and shown below.
+                  Required fields are marked with
+                  <span style="color: #e2476a">*</span>.
+                </p>
+              </div>
+
+              <form class="form" id="commentForm" novalidate>
+                <!-- Visible alert for the overall form result -->
+                <div
+                  class="form-alert"
+                  id="formAlert"
+                  role="alert"
+                  style="display: none"
+                ></div>
+
+                <div class="field">
+                  <label for="name">Name <span class="req">*</span></label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    autocomplete="name"
+                    placeholder="Your full name"
+                  />
+                  <span class="error-msg" data-error="name"></span>
+                </div>
+
+                <div class="field">
+                  <label for="email">Email <span class="req">*</span></label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="name@example.com"
+                  />
+                  <span class="error-msg" data-error="email"></span>
+                </div>
+
+                <div class="field">
+                  <label for="rating">Rating <span class="req">*</span></label>
+                  <select id="rating" name="rating">
+                    <option value="">Choose a rating…</option>
+                    <option value="5">★★★★★ — Excellent</option>
+                    <option value="4">★★★★ — Good</option>
+                    <option value="3">★★★ — Average</option>
+                    <option value="2">★★ — Poor</option>
+                    <option value="1">★ — Very poor</option>
+                  </select>
+                  <span class="error-msg" data-error="rating"></span>
+                </div>
+
+                <div class="field">
+                  <label for="message"
+                    >Comment <span class="req">*</span></label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    maxlength="500"
+                    placeholder="Share your experience (10–500 characters)…"
+                  ></textarea>
+                  <span class="error-msg" data-error="message"></span>
+                  <span class="char-count" id="charCount">0 / 500</span>
+                </div>
+
+                <!-- Honeypot: hidden from people, tempting to bots. Must stay empty. -->
+                <div class="visually-hidden" aria-hidden="true">
+                  <label for="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <button type="submit" class="btn btn--primary">
+                  Post comment
+                </button>
+              </form>
+            </div>
+
+            <!-- Live comments list (dynamic, from JSON) -->
+            <div>
+              <div class="section-head" style="margin-bottom: 20px">
+                <span class="eyebrow">Recent comments</span>
+                <h2>From our community</h2>
+              </div>
+              <div class="card" id="commentsList">
+                <p class="skeleton">Loading comments…</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">
+              <img src="images/logo.svg" alt="" width="28" height="28" /><span
+                >Veyra Technologies</span
+              >
+            </div>
+            <p style="max-width: 280px">
+              Cloud infrastructure engineered for emerging markets. Built in
+              Tashkent, serving the world.
+            </p>
+          </div>
+          <div>
+            <h4>Product</h4>
+            <a href="services.html">Cloud Compute</a
+            ><a href="services.html">Managed Databases</a
+            ><a href="services.html">Edge CDN</a
+            ><a href="services.html">Observability</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="about.html">About</a><a href="team.html">Team</a
+            ><a href="news.html">News</a><a href="feedback.html">Feedback</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="mailto:hello@veyra.tech">hello@veyra.tech</a
+            ><a href="tel:+998712001919">+998 71 200 19 19</a
+            ><a href="#" style="cursor: default">Tashkent, Uzbekistan</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >&copy; <span id="year">2026</span> Veyra Technologies LLC. All
+            rights reserved.</span
+          >
+          <span>CSIT128 Assignment 2 · University of Wollongong in Dubai</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/data-loader.js" defer></script>
+    <script src="js/validation.js" defer></script>
+  </body>
+</html>

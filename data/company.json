@@ -1,0 +1,269 @@
+{
+  "company": {
+    "name": "Veyra Technologies",
+    "legalName": "Veyra Technologies LLC",
+    "tagline": "Cloud infrastructure, engineered for emerging markets.",
+    "founded": 2019,
+    "headquarters": "Tashkent, Uzbekistan",
+    "email": "hello@veyra.tech",
+    "phone": "+998 71 200 19 19",
+    "mission": "We build fast, affordable and reliable cloud infrastructure so that builders in under-served regions can ship world-class products without paying a premium for distance.",
+    "history": [
+      "Veyra Technologies was founded in 2019 in Tashkent by three engineers who were tired of routing their workloads through data centres thousands of kilometres away. What started as a single rack of servers and a promise of \"sub-20-millisecond latency for Central Asia\" has grown into a regional cloud provider trusted by startups, banks and government platforms.",
+      "From the beginning, the company focused on one idea: developers in emerging markets should not have to choose between price, speed and reliability. By placing compute close to the users who need it and pairing it with a developer experience that feels familiar, Veyra removed the friction that pushed local teams onto distant, expensive platforms.",
+      "Today Veyra operates points of presence across five cities on three continents, serves more than 4,200 active customers, and keeps a measured 99.98% control-plane uptime. The team has grown from 3 founders to over 140 engineers, designers and support specialists, while keeping the original engineering culture intact."
+    ],
+    "stats": [
+      { "label": "Active customers", "value": "4,200+" },
+      { "label": "Control-plane uptime", "value": "99.98%" },
+      { "label": "Global regions", "value": "5" },
+      { "label": "Team members", "value": "140+" }
+    ]
+  },
+  "offices": [
+    {
+      "id": "tashkent",
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "role": "Global Headquarters",
+      "opened": 2019,
+      "address": "Amir Temur Avenue 88, Yunusobod, Tashkent 100084",
+      "blurb": "Our founding office and primary engineering hub, home to the platform, networking and support teams."
+    },
+    {
+      "id": "dubai",
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "role": "MENA Sales & Edge PoP",
+      "opened": 2021,
+      "address": "One Central, World Trade Centre, Dubai",
+      "blurb": "Commercial headquarters for the Middle East and North Africa, plus a low-latency edge location."
+    },
+    {
+      "id": "singapore",
+      "city": "Singapore",
+      "country": "Singapore",
+      "role": "APAC Region",
+      "opened": 2022,
+      "address": "80 Robinson Road, Singapore 068898",
+      "blurb": "Our gateway to South-East Asian markets and the anchor of the Asia-Pacific availability region."
+    },
+    {
+      "id": "berlin",
+      "city": "Berlin",
+      "country": "Germany",
+      "role": "EU Region & Compliance",
+      "opened": 2023,
+      "address": "Friedrichstrasse 68, 10117 Berlin",
+      "blurb": "Hosts EU-resident workloads and leads our GDPR and ISO compliance programme."
+    },
+    {
+      "id": "austin",
+      "city": "Austin",
+      "country": "United States",
+      "role": "Americas Region",
+      "opened": 2024,
+      "address": "501 Congress Avenue, Austin, TX 78701",
+      "blurb": "Our newest region, opened to support customers expanding into North America."
+    }
+  ],
+  "timeline": [
+    {
+      "year": 2019,
+      "milestone": "Company founded in Tashkent",
+      "detail": "First production rack goes live; 12 early-access customers onboarded."
+    },
+    {
+      "year": 2020,
+      "milestone": "Managed Databases launched",
+      "detail": "Reached 500 active customers and closed a seed funding round."
+    },
+    {
+      "year": 2021,
+      "milestone": "Dubai office & MENA expansion",
+      "detail": "Edge points of presence added; revenue grew 3.4x year over year."
+    },
+    {
+      "year": 2022,
+      "milestone": "Singapore region opens",
+      "detail": "Crossed 2,000 customers and shipped the Edge CDN product."
+    },
+    {
+      "year": 2023,
+      "milestone": "Berlin region & ISO 27001",
+      "detail": "Achieved ISO 27001 certification and launched the Observability Suite."
+    },
+    {
+      "year": 2024,
+      "milestone": "Americas region in Austin",
+      "detail": "Surpassed 4,000 customers; team grew past 140 people."
+    },
+    {
+      "year": 2025,
+      "milestone": "Series B & platform v3",
+      "detail": "Raised a Series B round and rebuilt the developer console from the ground up."
+    }
+  ],
+  "services": [
+    {
+      "id": "compute",
+      "name": "Cloud Compute",
+      "icon": "server",
+      "summary": "On-demand virtual machines and autoscaling container clusters billed by the second.",
+      "details": "Spin up VMs in under 30 seconds across any of our five regions. Choose general-purpose, compute-optimised or memory-optimised shapes, attach NVMe storage, and let our autoscaler match capacity to real traffic.",
+      "startingPrice": "from $4 / month"
+    },
+    {
+      "id": "databases",
+      "name": "Managed Databases",
+      "icon": "database",
+      "summary": "Fully managed PostgreSQL, MySQL and Redis with automated backups and failover.",
+      "details": "We handle patching, replication and point-in-time recovery so your team never carries a pager for the database. High-availability clusters fail over in seconds with no data loss.",
+      "startingPrice": "from $12 / month"
+    },
+    {
+      "id": "edge",
+      "name": "Edge CDN",
+      "icon": "globe",
+      "summary": "A content and API delivery network with caching at every regional point of presence.",
+      "details": "Serve static assets and cache API responses from the location closest to each visitor. Includes free TLS certificates, smart compression and real-time cache analytics.",
+      "startingPrice": "from $0.02 / GB"
+    },
+    {
+      "id": "devops",
+      "name": "DevOps & Migration",
+      "icon": "wrench",
+      "summary": "Hands-on help moving your workloads to Veyra with zero-downtime cutovers.",
+      "details": "Our solutions engineers design your architecture, write the infrastructure-as-code, and run the migration alongside your team. Most customers are fully migrated within two weeks.",
+      "startingPrice": "custom quote"
+    },
+    {
+      "id": "observability",
+      "name": "Observability Suite",
+      "icon": "chart",
+      "summary": "Metrics, logs and traces in one place, with alerting that reaches your team where they are.",
+      "details": "Collect metrics, structured logs and distributed traces with a single agent. Build dashboards, set SLO-based alerts and route notifications to email, Slack or Telegram.",
+      "startingPrice": "from $9 / month"
+    },
+    {
+      "id": "security",
+      "name": "Security & Compliance",
+      "icon": "shield",
+      "summary": "Managed firewalls, DDoS protection and audit-ready compliance reporting.",
+      "details": "Protect every workload with managed network firewalls, automatic DDoS mitigation and continuous vulnerability scanning. Download SOC 2 and ISO 27001 evidence on demand.",
+      "startingPrice": "from $15 / month"
+    }
+  ],
+  "awards": [
+    {
+      "year": 2025,
+      "title": "Cloud Provider of the Year",
+      "organisation": "Central Asia Tech Awards",
+      "note": "Recognised for regional infrastructure leadership."
+    },
+    {
+      "year": 2024,
+      "title": "Best Developer Experience",
+      "organisation": "MENA DevCon",
+      "note": "Voted by attending engineers for the new console."
+    },
+    {
+      "year": 2024,
+      "title": "Top 50 Startups to Watch",
+      "organisation": "Emerging Markets Review",
+      "note": "Listed among the fastest-growing infrastructure firms."
+    },
+    {
+      "year": 2023,
+      "title": "ISO 27001 Certification",
+      "organisation": "BSI Group",
+      "note": "Independent certification of our information security."
+    },
+    {
+      "year": 2022,
+      "title": "Sustainability in Tech",
+      "organisation": "Green Cloud Initiative",
+      "note": "For powering the Singapore region on renewable energy."
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Madina Karimova",
+      "role": "CTO",
+      "company": "Sapa Pay",
+      "rating": 5,
+      "quote": "Migrating our payments platform to Veyra cut our median API latency in half. The migration team felt like an extension of our own."
+    },
+    {
+      "name": "Daniyar Iskakov",
+      "role": "Head of Engineering",
+      "company": "Orda Logistics",
+      "rating": 5,
+      "quote": "The managed databases just work. We have not lost a minute of sleep over failover since we switched two years ago."
+    },
+    {
+      "name": "Lena Hoffmann",
+      "role": "Founder",
+      "company": "Kausa Analytics",
+      "rating": 4,
+      "quote": "Pricing is transparent and the observability suite replaced three separate tools for us. Support replies in minutes, not days."
+    },
+    {
+      "name": "Arman Toleu",
+      "role": "Platform Lead",
+      "company": "Mektep EdTech",
+      "rating": 5,
+      "quote": "Being able to keep student data inside our region while still scaling globally was the deciding factor. Veyra made it painless."
+    }
+  ],
+  "team": [
+    {
+      "name": "Ravshan Yusupov",
+      "role": "Co-Founder & CEO",
+      "initials": "RY",
+      "founder": true,
+      "accent": "#2563eb",
+      "bio": "Ravshan leads strategy and partnerships. Before Veyra he spent eight years building telecom billing systems across Central Asia."
+    },
+    {
+      "name": "Aigerim Sultanova",
+      "role": "Co-Founder & CTO",
+      "initials": "AS",
+      "founder": true,
+      "accent": "#0ea5a4",
+      "bio": "Aigerim architects the platform. She is a distributed-systems engineer who previously scaled infrastructure at a regional ride-hailing company."
+    },
+    {
+      "name": "Timur Abdullaev",
+      "role": "Co-Founder & COO",
+      "initials": "TA",
+      "founder": true,
+      "accent": "#7c3aed",
+      "bio": "Timur runs operations and finance, keeping the company disciplined as it grows across continents."
+    },
+    {
+      "name": "Nilufar Rashidova",
+      "role": "VP of Engineering",
+      "initials": "NR",
+      "founder": false,
+      "accent": "#db2777",
+      "bio": "Nilufar leads the engineering organisation and owns delivery across the compute and database teams."
+    },
+    {
+      "name": "Sergey Volkov",
+      "role": "Head of Network",
+      "initials": "SV",
+      "founder": false,
+      "accent": "#ea580c",
+      "bio": "Sergey designs the global backbone and edge network that keeps Veyra fast everywhere."
+    },
+    {
+      "name": "Dilnoza Ergasheva",
+      "role": "Head of Customer Success",
+      "initials": "DE",
+      "founder": false,
+      "accent": "#16a34a",
+      "bio": "Dilnoza makes sure every customer is supported from first migration to long-term scale."
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Veyra Technologies</title>
+    <meta
+      name="description"
+      content="The story of Veyra Technologies: our mission, our journey, and the awards we have earned along the way."
+    />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="index.html"
+          ><img
+            src="images/logo.svg"
+            alt="Veyra logo"
+            width="30"
+            height="30"
+          /><span>Veyra</span></a
+        >
+        <button
+          class="nav-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Page intro -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">About us</span>
+            <h1>Building the cloud our region deserves.</h1>
+            <p class="lead">
+              We started Veyra because we were tired of routing our own
+              workloads halfway around the world. Here is how far that idea has
+              taken us.
+            </p>
+          </div>
+
+          <!-- Mission card -->
+          <div class="card" style="border-left: 4px solid var(--brand)">
+            <h3>Our mission</h3>
+            <p style="margin: 0">
+              We build fast, affordable and reliable cloud infrastructure so
+              that builders in under-served regions can ship world-class
+              products without paying a premium for distance.
+            </p>
+          </div>
+
+          <!-- Company history (loaded from API) -->
+          <div style="margin-top: 38px; max-width: 780px" id="companyIntro">
+            <p class="skeleton">Loading company history…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Five-year timeline TABLE (dynamic, from JSON) -->
+      <section class="section section--soft">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Our journey</span>
+            <h2>Five years of progress</h2>
+            <p class="lead">
+              A timeline of the milestones that shaped Veyra, presented as a
+              table.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>
+                Table 1 — Company milestones, 2019–2025
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Milestone</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody id="timelineBody">
+                <tr>
+                  <td colspan="3" class="skeleton">Loading timeline…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Awards TABLE (dynamic, from JSON) -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Recognition</span>
+            <h2>Awards &amp; certifications</h2>
+            <p class="lead">
+              Independent recognition of our infrastructure, developer
+              experience and security.
+            </p>
+          </div>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>
+                Table 2 — Awards received by Veyra Technologies
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Award</th>
+                  <th scope="col">Awarded by</th>
+                  <th scope="col">For</th>
+                </tr>
+              </thead>
+              <tbody id="awardsBody">
+                <tr>
+                  <td colspan="4" class="skeleton">Loading awards…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">
+              <img src="images/logo.svg" alt="" width="28" height="28" /><span
+                >Veyra Technologies</span
+              >
+            </div>
+            <p style="max-width: 280px">
+              Cloud infrastructure engineered for emerging markets. Built in
+              Tashkent, serving the world.
+            </p>
+          </div>
+          <div>
+            <h4>Product</h4>
+            <a href="services.html">Cloud Compute</a
+            ><a href="services.html">Managed Databases</a
+            ><a href="services.html">Edge CDN</a
+            ><a href="services.html">Observability</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="about.html">About</a><a href="team.html">Team</a
+            ><a href="news.html">News</a><a href="feedback.html">Feedback</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="mailto:hello@veyra.tech">hello@veyra.tech</a
+            ><a href="tel:+998712001919">+998 71 200 19 19</a
+            ><a href="#" style="cursor: default">Tashkent, Uzbekistan</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >&copy; <span id="year">2026</span> Veyra Technologies LLC. All
+            rights reserved.</span
+          >
+          <span>CSIT128 Assignment 2 · University of Wollongong in Dubai</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/data-loader.js" defer></script>
+  </body>
+</html>

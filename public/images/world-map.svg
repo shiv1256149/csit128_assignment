@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3f8ff"/>
+      <stop offset="1" stop-color="#eaf2fb"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="520" rx="16" fill="url(#ocean)"/>
+
+  <!-- ===== continents (stylised, equirectangular layout) ===== -->
+  <g fill="#d3deef" stroke="#bccbe3" stroke-width="1.5" stroke-linejoin="round">
+    <!-- North America -->
+    <path d="M130 95 C160 78,235 74,290 96 C312 108,305 138,280 150 C300 165,285 195,250 205 L250 230 C240 250,215 255,205 235 C185 245,168 235,168 215 C140 205,120 175,122 150 C110 130,115 108,130 95 Z"/>
+    <!-- Greenland -->
+    <path d="M360 70 C390 64,412 82,396 102 C376 114,352 100,360 70 Z"/>
+    <!-- South America -->
+    <path d="M268 268 C300 262,322 280,318 308 C330 330,322 372,298 410 C286 432,268 446,258 430 C248 405,258 372,252 345 C244 320,250 288,268 268 Z"/>
+    <!-- Europe -->
+    <path d="M492 110 C510 96,548 96,566 108 C584 116,580 138,560 145 C568 160,548 172,528 168 C512 178,492 170,492 152 C480 140,482 120,492 110 Z"/>
+    <!-- Africa -->
+    <path d="M512 195 C548 186,596 192,612 214 C626 236,612 270,596 300 C584 330,560 360,540 360 C522 350,516 322,510 295 C500 268,498 230,512 195 Z"/>
+    <!-- Asia -->
+    <path d="M588 110 C620 90,720 86,800 96 C845 102,858 130,838 158 C852 178,824 200,792 196 C760 210,712 206,680 198 C648 206,612 196,596 176 C580 158,578 128,588 110 Z"/>
+    <!-- India -->
+    <path d="M664 196 C686 200,704 214,698 240 C692 258,674 262,668 244 C660 224,656 206,664 196 Z"/>
+    <!-- SE Asia -->
+    <path d="M770 232 C792 228,812 240,806 258 C798 274,776 272,768 256 C762 244,762 236,770 232 Z"/>
+    <path d="M822 250 c10 -2 18 6 12 14 c-8 8 -22 2 -18 -8 z"/>
+    <!-- Australia -->
+    <path d="M808 330 C838 320,884 328,892 356 C898 380,870 398,838 396 C812 396,798 372,802 352 C800 340,802 334,808 330 Z"/>
+  </g>
+
+  <!-- ===== office markers ===== -->
+  <g>
+    <!-- helper: pulse ring + pin + label -->
+    <!-- Austin (229,173) -->
+    <circle cx="229" cy="173" r="20" fill="#2563eb" opacity="0.12"/>
+    <circle cx="229" cy="173" r="8" fill="#2563eb" stroke="#fff" stroke-width="2.5"/>
+    <text x="229" y="206" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f3a">Austin</text>
+
+    <!-- Berlin (537,108) -->
+    <circle cx="537" cy="108" r="20" fill="#2563eb" opacity="0.12"/>
+    <circle cx="537" cy="108" r="8" fill="#2563eb" stroke="#fff" stroke-width="2.5"/>
+    <text x="537" y="92" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f3a">Berlin</text>
+
+    <!-- Tashkent (692,141) - HQ, highlighted in teal -->
+    <circle cx="692" cy="141" r="24" fill="#0ea5a4" opacity="0.15"/>
+    <circle cx="692" cy="141" r="9" fill="#0ea5a4" stroke="#fff" stroke-width="2.5"/>
+    <text x="692" y="123" text-anchor="middle" font-size="14" font-weight="800" fill="#0b1f3a">Tashkent (HQ)</text>
+
+    <!-- Dubai (654,187) -->
+    <circle cx="654" cy="187" r="20" fill="#2563eb" opacity="0.12"/>
+    <circle cx="654" cy="187" r="8" fill="#2563eb" stroke="#fff" stroke-width="2.5"/>
+    <text x="640" y="208" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f3a">Dubai</text>
+
+    <!-- Singapore (788,256) -->
+    <circle cx="788" cy="256" r="20" fill="#2563eb" opacity="0.12"/>
+    <circle cx="788" cy="256" r="8" fill="#2563eb" stroke="#fff" stroke-width="2.5"/>
+    <text x="788" y="289" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f3a">Singapore</text>
+  </g>
+</svg>

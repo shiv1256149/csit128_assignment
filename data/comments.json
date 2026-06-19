@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1781510462615,
+    "name": "Luciano",
+    "email": "fasdjklf@fiojs.rui",
+    "rating": 5,
+    "message": "I like this website",
+    "submittedAt": "2026-06-15T08:01:02.615Z"
+  },
+  {
+    "id": 1781358534723,
+    "name": "Komron Dadamukhamedov",
+    "email": "kd888@uowmail.edu.au",
+    "rating": 5,
+    "message": "I really liked the speed of these things.",
+    "submittedAt": "2026-06-13T13:48:54.723Z"
+  },
+  {
+    "id": 1781358264214,
+    "name": "My Name",
+    "email": "somemail@jfkdsl.ru",
+    "rating": 4,
+    "message": "fdsaffsddfsafasfas",
+    "submittedAt": "2026-06-13T13:44:24.214Z"
+  },
+  {
+    "id": 1717500000000,
+    "name": "Bekzod Karimov",
+    "rating": 5,
+    "message": "Switched our startup from a US provider and the latency difference in Tashkent is night and day. Support actually answers in Russian too.",
+    "submittedAt": "2026-05-28T09:14:00.000Z"
+  },
+  {
+    "id": 1717400000000,
+    "name": "Priya Nair",
+    "rating": 4,
+    "message": "Great value for managed databases. Would love a Mumbai region next, but the Singapore one is already fast enough for us.",
+    "submittedAt": "2026-05-24T16:40:00.000Z"
+  },
+  {
+    "id": 1717300000000,
+    "name": "Otabek Yusupov",
+    "rating": 5,
+    "message": "The migration team moved our entire platform over a weekend with zero downtime. Genuinely impressed with the engineering.",
+    "submittedAt": "2026-05-19T11:05:00.000Z"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "veyra-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Veyra Technologies company profile web application (CSIT128 Assignment 2).",
+  "license": "UNLICENSED",
+  "author": "Group <number> - CSIT128",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
