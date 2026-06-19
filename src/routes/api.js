@@ -209,4 +209,40 @@ router.get(
   })
 );
 
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { ok: false, errors: ["Too many messages submitted. Please try again later."] },
+});
+
+router.post(
+  "/contact",
+  contactLimiter,
+  asyncHandler(async (req, res) => {
+    const { name, email, subject, message } = req.body || {};
+    const errors = [];
+
+    if (!isValidName(name)) errors.push("A valid name (2-60 letters) is required.");
+    if (!isValidEmail(email)) errors.push("A valid email address is required.");
+    if (!subject || subject.trim().length < 3 || subject.trim().length > 120) {
+      errors.push("Subject must be between 3 and 120 characters.");
+    }
+    if (!message || message.trim().length < 10 || message.trim().length > 800) {
+      errors.push("Message must be between 10 and 800 characters.");
+    }
+    if (errors.length) return res.status(400).json({ ok: false, errors });
+
+    await db("contact_messages").insert({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      subject: subject.trim(),
+      message: message.trim(),
+    });
+
+    res.status(201).json({ ok: true });
+  })
+);
+
 module.exports = router;

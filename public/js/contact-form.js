@@ -1,4 +1,4 @@
-// contact form: client validation only, opens mailto: link on success (no backend)
+// contact form: validates client-side, posts to /api/contact (admin sees it under Contact requests)
 (function () {
   "use strict";
 
@@ -77,7 +77,7 @@
     alertBox.style.display = "block";
   }
 
-  form.addEventListener("submit", function (ev) {
+  form.addEventListener("submit", async function (ev) {
     ev.preventDefault();
     if (alertBox) alertBox.style.display = "none";
 
@@ -95,16 +95,30 @@
     }
 
     const name = form.elements["name"].value.trim();
+    const email = form.elements["email"].value.trim();
     const subject = form.elements["subject"].value.trim();
     const message = form.elements["message"].value.trim();
-    const body = "From: " + name + " (" + form.elements["email"].value.trim() + ")\n\n" + message;
 
-    window.location.href =
-      "mailto:hello@veyra.tech?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(body);
+    const submitBtn = form.querySelector('[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
 
-    showAlert("success", "Your email client should now open with the message ready to send.");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        showAlert("success", "Message sent. We'll get back to you soon.");
+        form.reset();
+      } else {
+        showAlert("fail", (data.errors && data.errors[0]) || "Unable to send your message.");
+      }
+    } catch {
+      showAlert("fail", "Unable to send your message. Please try again later.");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 })();

@@ -76,10 +76,11 @@ router.get(
     const [{ count: users }] = await db("users").count("id as count");
     const [{ count: news }] = await db("news_articles").count("id as count");
     const [{ count: orders }] = await db("orders").count("id as count");
+    const [{ count: contact }] = await db("contact_messages").count("id as count");
 
     res.render("admin/dashboard", {
       admin: req.session.admin,
-      counts: { products, services, team, comments, users, news, orders },
+      counts: { products, services, team, comments, users, news, orders, contact },
     });
   })
 );
@@ -363,6 +364,38 @@ router.post(
   asyncHandler(async (req, res) => {
     await db("team_members").where({ id: req.params.id }).del();
     res.redirect("/admin/team");
+  })
+);
+
+/* ---------------------------------------------------------------- *
+ * Contact requests
+ * ---------------------------------------------------------------- */
+router.get(
+  "/contact",
+  asyncHandler(async (req, res) => {
+    const messages = await db("contact_messages").orderBy("submitted_at", "desc");
+    res.render("admin/contact", { admin: req.session.admin, messages });
+  })
+);
+
+router.post(
+  "/contact/:id/toggle",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    const msg = await db("contact_messages").where({ id: req.params.id }).first();
+    if (msg) {
+      await db("contact_messages").where({ id: req.params.id }).update({ is_read: !msg.is_read });
+    }
+    res.redirect("/admin/contact");
+  })
+);
+
+router.post(
+  "/contact/:id/delete",
+  verifyCsrfToken,
+  asyncHandler(async (req, res) => {
+    await db("contact_messages").where({ id: req.params.id }).del();
+    res.redirect("/admin/contact");
   })
 );
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/admin-head", { title: "Contact requests" }) %>
+<body class="bg-slate-100 min-h-screen">
+  <%- include("../partials/admin-nav") %>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-6">Contact requests</h1>
+
+    <table class="w-full bg-white rounded-lg shadow overflow-hidden text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-left">
+        <tr>
+          <th class="px-4 py-2">From</th>
+          <th class="px-4 py-2">Subject</th>
+          <th class="px-4 py-2">Message</th>
+          <th class="px-4 py-2">Read</th>
+          <th class="px-4 py-2">Received</th>
+          <th class="px-4 py-2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% messages.forEach(m => { %>
+          <tr class="border-t align-top">
+            <td class="px-4 py-2"><%= m.name %><br/><span class="text-xs text-slate-400"><%= m.email %></span></td>
+            <td class="px-4 py-2"><%= m.subject %></td>
+            <td class="px-4 py-2 max-w-md"><%= m.message %></td>
+            <td class="px-4 py-2"><%= m.is_read ? "Yes" : "No" %></td>
+            <td class="px-4 py-2"><%= new Date(m.submitted_at).toISOString().slice(0,10) %></td>
+            <td class="px-4 py-2 flex gap-2">
+              <form method="POST" action="/admin/contact/<%= m.id %>/toggle">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-blue-600 hover:underline"><%= m.is_read ? "Mark unread" : "Mark read" %></button>
+              </form>
+              <form method="POST" action="/admin/contact/<%= m.id %>/delete" onsubmit="return confirm('Delete this message?');">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button type="submit" class="text-red-600 hover:underline">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+        <% if (!messages.length) { %>
+          <tr><td colspan="6" class="px-4 py-6 text-center text-slate-400">No messages yet.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
