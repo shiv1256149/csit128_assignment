@@ -2,7 +2,8 @@
 <html lang="en">
 <%- include("../partials/admin-head", { title: "Team" }) %>
 <body class="bg-slate-100 min-h-screen">
-  <%- include("../partials/admin-nav") %>
+ <%- include("../partials/admin-head", { title: "Team" }) %>
+
   <main class="max-w-6xl mx-auto px-4 py-8">
     <h1 class="text-2xl font-semibold text-slate-800 mb-6"><%= editing ? "Edit team member" : "New team member" %></h1>
 
